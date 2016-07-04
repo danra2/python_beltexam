@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Results</title>
+  </head>
+  <body>
+   <a href="/login_regis/">Logout</a>
+   <h1>Hello, {{person.user_name}}</h1>
+   <p>Your Trip Schedules:</p>
+       <table>
+         <tr>
+           <th>Destination:</th>
+           <th>Travel Start Date:</th>
+           <th>Travel End Date:</th>
+           <th>Plan:</th>
+         </tr>
+         {% for user in mytrips %}
+         <tr>
+           <td><a href="/triplan/others/{{user.id}}">{{user.destination}}</a></td>
+           <td>{{user.travel_from}}</td>
+           <td>{{user.travel_to}}</td>
+           <td>{{user.description}}</td>
+         </tr>
+         {% endfor %}
+         {% for user in alltrips %}
+         <tr>
+           <td><a href="/triplan/others/{{user.triplan.id}}">{{user.triplan.destination}}</a></td>
+           <td>{{user.triplan.travel_from}}</td>
+           <td>{{user.triplan.travel_to}}</td>
+           <td>{{user.triplan.description}}</td>
+         </tr>
+         {% endfor %}
+       </table>
+       <br>
+       <br>
+       <p>Other Users's Travel Plans:</p>
+       <table>
+         <tr>
+           <th>Name:</th>
+           <th>Destination:</th>
+           <th>Travel Start Date:</th>
+           <th>Travel End Date:</th>
+           <th>Do You Want To Join:</th>
+         </tr>
+         {% for user in trip %}
+         <tr>
+           <td>{{user.user.first_name}}, {{user.user.last_name}}</td>
+           <td><a href="/triplan/others/{{user.id}}">{{user.destination}}</a></td>
+           <td>{{user.travel_from}}</td>
+           <td>{{user.travel_to}}</td>
+         <td>
+             <form action="/triplan/join/{{user.id}}" method = "post">
+               {% csrf_token %}
+               <input type="submit" value = "Join">
+             </form>
+           </td>
+         </tr>
+         {% endfor %}
+       </table>
+       <br>
+       <br>
+       <a href="/triplan/addtripload">Add Travel Plan</a>
+  </body>

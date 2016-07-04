@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Destination Page</title>
+  </head>
+  <body>
+    <a href="/triplan/mytrips">Home</a>
+    <a href="/login_regis/">Logout</a>
+    <h2>{{trip.destination}}</h2>
+    <h3>Planned by: {{trip.user.first_name}}, {{trip.user.last_name}}</h3>
+    <h3>Description: {{trip.description}}</h3>
+    <h3>Travel Date From: {{trip.travel_from}}</h3>
+    <h3>Travel Date To: {{trip.travel_to}}</h3>
+    <br>
+    <br>
+    <h2>Other users joining the trip</h2>
+    {% for other in others%}
+      <h3>{{other.user.user_name}}</h3>
+    {% endfor %}
+  </body>
+</html>
